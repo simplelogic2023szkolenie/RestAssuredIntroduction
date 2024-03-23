@@ -4,7 +4,6 @@ import base.TestBase;
 import org.junit.jupiter.api.Test;
 
 import static io.restassured.RestAssured.given;
-import static io.restassured.RestAssured.when;
 import static org.hamcrest.Matchers.*;
 
 public class GetPosts extends TestBase {
