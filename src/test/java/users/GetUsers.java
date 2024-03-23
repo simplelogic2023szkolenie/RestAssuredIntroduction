@@ -4,6 +4,7 @@ import base.TestBase;
 import org.junit.jupiter.api.Test;
 
 import static io.restassured.RestAssured.given;
+import static org.hamcrest.Matchers.*;
 
 public class GetUsers extends TestBase {
 
@@ -14,6 +15,32 @@ public class GetUsers extends TestBase {
         when().
                 get(users).
         then().
-                statusCode(200);
+                statusCode(200)
+                .body("",hasSize(10));
+    }
+
+    @Test
+    public void getFirstUser() {
+        given().
+                baseUri(baseUrl).
+        when().
+                get(users + "/1").
+        then().
+                 statusCode(200).
+                 body("id", equalTo(1)).
+                 body("username", equalTo("Bret")).
+                 body("address.street", equalTo("Kulas Light"));
+    }
+
+    @Test
+    public void getFirstUserV2() {
+        given().
+                baseUri(baseUrl).
+                pathParams("id", 1).
+        when().
+                get(users + "/{id}").
+        then().
+                statusCode(200).
+                time(lessThan(1200L));
     }
 }
