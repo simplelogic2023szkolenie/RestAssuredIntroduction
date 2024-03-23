@@ -1,15 +1,18 @@
 package users;
 
+import base.TestBase;
 import org.junit.jupiter.api.Test;
 
-import static io.restassured.RestAssured.when;
+import static io.restassured.RestAssured.given;
 
-public class GetUsers {
+public class GetUsers extends TestBase {
 
     @Test
     public void shouldGetAllUsers() {
+        given().
+                baseUri(baseUrl).
         when().
-                get("https://jsonplaceholder.typicode.com/users").
+                get(users).
         then().
                 statusCode(200);
     }
