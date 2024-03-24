@@ -73,6 +73,7 @@ public class GetUsers extends TestBase {
                         get(users).
                 then().
                         statusCode(200).
-                        time(lessThan(1200L));
+                        time(lessThan(1200L))
+                .body("[0].username", equalTo("Bret"));
     }
 }
