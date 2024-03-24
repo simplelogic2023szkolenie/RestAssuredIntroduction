@@ -22,6 +22,7 @@ public class GetPosts extends TestBase {
                         body("", hasSize(100)).extract().response();
     }
 
+
     @Test
     public void getFirstPost() {
         given().

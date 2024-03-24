@@ -1,15 +1,37 @@
 package users;
 
 import base.TestBase;
+import io.restassured.path.json.JsonPath;
+import io.restassured.response.Response;
 import org.junit.jupiter.api.Test;
 
 import java.util.HashMap;
 import java.util.Map;
 
 import static io.restassured.RestAssured.given;
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 
 public class GetUsers extends TestBase {
+
+    @Test
+    public void shouldGetAllUsersExtractBody() {
+        Response reponse =
+                given().
+                                baseUri(baseUrl).
+                        when().
+                                get(users).
+                        then().
+                                statusCode(200)
+                                .extract().response();
+
+        JsonPath jsonPath = reponse.jsonPath();
+
+        assertThat(jsonPath.get("[0].username"), equalTo("Bret"));
+        assertThat(jsonPath.getList(""), hasSize(10));
+        assertThat(jsonPath.getList("").size(), equalTo(10));
+    }
+
 
     @Test
     public void shouldGetAllUsers() {
@@ -19,7 +41,7 @@ public class GetUsers extends TestBase {
                         get(users).
                 then().
                         statusCode(200)
-                        .body("", hasSize(10));
+                        .body("", hasSize(11));
     }
 
     @Test
