@@ -57,4 +57,13 @@ public class PostPosts extends TestBase {
                         .body("id", equalTo(101))
                         .body("title", equalTo("customtitle"));
     }
+
+    // stworzenie obiektu klasy Post
+    // przekazanianie go w body
+
+    // przy pomocy .extract().as(Post.class)
+    // pobranie obiektu z reponspona
+    // porównanie tych dwóch obiektów
+
+
 }

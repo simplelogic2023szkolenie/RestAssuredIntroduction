@@ -150,4 +150,29 @@ public class PostUser extends TestBase {
         expectedUser.setId(reponseUser.getId());
         assertThat(reponseUser, equalTo(expectedUser));
     }
+
+
+    @Test
+    public void shouldCreateNewUserV7() {
+        User expectedUser = UserProvider.getFullUserData();
+
+        User reponseUser =
+                given().
+                                body(expectedUser).
+                                contentType(ContentType.JSON).
+                                baseUri(baseUrl).
+                        when().
+                                post(users).
+                        then().
+                                statusCode(201)
+                                .extract()
+                                .as(User.class);
+
+        reponseUser.getAddress().getGeo().setLat("123123123312123");
+
+        reponseUser.setName("qweqewqe");
+
+        reponseUser.getCompany().setName("qwe");
+        compareObjectWithoutId(reponseUser, expectedUser);
+    }
 }
