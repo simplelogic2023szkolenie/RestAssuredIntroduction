@@ -8,7 +8,6 @@ import lombok.*;
 @Builder
 public class User {
    private int id;
-   @NonNull
    private String name;
    private String username;
    private String email;
