@@ -11,6 +11,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static io.restassured.RestAssured.given;
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 
 public class PostUser extends TestBase {
@@ -128,5 +129,25 @@ public class PostUser extends TestBase {
                         post(users).
                 then().
                         statusCode(201);
+    }
+
+    @Test
+    public void shouldCreateNewUserV6() {
+        User expectedUser = UserProvider.getFullUserData();
+
+        User reponseUser =
+                given().
+                                body(expectedUser).
+                                contentType(ContentType.JSON).
+                                baseUri(baseUrl).
+                        when().
+                                post(users).
+                        then().
+                                statusCode(201)
+                                .extract()
+                                .as(User.class);
+
+        expectedUser.setId(reponseUser.getId());
+        assertThat(reponseUser, equalTo(expectedUser));
     }
 }

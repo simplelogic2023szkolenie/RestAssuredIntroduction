@@ -52,13 +52,13 @@ public class GetPosts extends TestBase {
     @Test
     public void getPostsWithIdV1() {
         given().
-                        baseUri(baseUrl).
-                        queryParam("userId", 1).
-                when().
-                        get(posts).
-                then().
-                        statusCode(200).
-                        time(lessThan(1200L));
+                baseUri(baseUrl).
+                queryParam("userId", 1).
+        when().
+                get(posts).
+        then().
+                statusCode(200).
+                time(lessThan(1200L));
     }
 
     @Test
