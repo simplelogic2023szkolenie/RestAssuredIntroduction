@@ -1,7 +1,37 @@
 package posts;
 
-public class PostPosts {
-    // przygoutuj własny json do tworzniu postu
-    // wyslij go z użyciem post()
-    // zrób asercje sprawdzaje id, oraz jego z pól json
+import base.TestBase;
+import io.restassured.http.ContentType;
+import org.junit.jupiter.api.Test;
+
+import static io.restassured.RestAssured.given;
+import static org.hamcrest.Matchers.equalTo;
+
+public class PostPosts extends TestBase {
+
+    // zrób zapytanie tworzące post, i bodu uzupełnij poprzed Mape
+
+
+
+    private String body = """
+            {
+                 "userId": 1,
+                 "title": "customtitle",
+                 "body": "quia etoitecto"
+               }
+            """;
+
+    @Test
+    public void shouldCreateNewUser() {
+        given().
+                        body(body).
+                        contentType(ContentType.JSON).
+                        baseUri(baseUrl).
+                when().
+                        post(posts).
+                then().
+                        statusCode(201)
+                        .body("id", equalTo(101))
+                        .body("title", equalTo("customtitle"));
+    }
 }

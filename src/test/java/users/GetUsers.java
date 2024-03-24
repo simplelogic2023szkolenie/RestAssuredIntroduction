@@ -3,7 +3,7 @@ package users;
 import base.TestBase;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
-import matchers.HasSizeMatcher;
+import matchers.CustomCollectionSizeMatcher;
 import org.junit.jupiter.api.Test;
 
 import java.util.HashMap;
@@ -20,10 +20,10 @@ public class GetUsers extends TestBase {
                 given().
                                 baseUri(baseUrl).
                         when().
-                                get(users).
+                                get(posts+"/1").
                         then().
                                 statusCode(200)
-                                .body("", HasSizeMatcher.hasSize(11));
+                                .body("", CustomCollectionSizeMatcher.hasSize(2));
     }
 
     @Test
