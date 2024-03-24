@@ -2,6 +2,8 @@ package users;
 
 import base.TestBase;
 import io.restassured.http.ContentType;
+import models.user.Address;
+import models.user.User;
 import org.junit.jupiter.api.Test;
 
 import java.util.HashMap;
@@ -67,6 +69,35 @@ public class PostUser extends TestBase {
 
 
         given().
+                        body(user).
+                        contentType(ContentType.JSON).
+                        baseUri(baseUrl).
+                when().
+                        post(users).
+                then().
+                        statusCode(201).
+                        body("id", equalTo(11)).
+                        body("username", equalTo("mtadla")).
+                        body("address.city", equalTo("Lublin"));
+    }
+
+
+    @Test
+    public void shouldCreateNewUserV3() {
+        Address address = Address.builder()
+                .city("Lublin")
+                .street("Warszawska")
+                .build();
+
+        User user = User.builder()
+                .name("Mateusz Tadla")
+                .email("mtadl@april.biz")
+                .username("mtadla")
+                .address(address)
+                .build();
+
+
+        given().
                 body(user).
                 contentType(ContentType.JSON).
                 baseUri(baseUrl).
@@ -78,5 +109,6 @@ public class PostUser extends TestBase {
                 body("username", equalTo("mtadla")).
                 body("address.city", equalTo("Lublin"));
     }
+
 
 }

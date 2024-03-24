@@ -4,6 +4,9 @@ import base.TestBase;
 import io.restassured.http.ContentType;
 import org.junit.jupiter.api.Test;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.equalTo;
 
@@ -22,9 +25,29 @@ public class PostPosts extends TestBase {
             """;
 
     @Test
-    public void shouldCreateNewUser() {
+    public void shouldCreateNewPost() {
         given().
                         body(body).
+                        contentType(ContentType.JSON).
+                        baseUri(baseUrl).
+                when().
+                        post(posts).
+                then().
+                        statusCode(201)
+                        .body("id", equalTo(101))
+                        .body("title", equalTo("customtitle"));
+    }
+
+
+    @Test
+    public void shouldCreateNewPost2() {
+        Map<String, Object> post = new HashMap<>();
+        post.put("userId", 12);
+        post.put("title", "customtitle");
+        post.put("body", "quia etoitecto");
+
+        given().
+                        body(post).
                         contentType(ContentType.JSON).
                         baseUri(baseUrl).
                 when().
