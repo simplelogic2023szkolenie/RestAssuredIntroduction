@@ -10,12 +10,6 @@ import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.*;
 
 public class GetPosts extends TestBase {
-    // zrób zapytanie pobierające wszystkie posty
-    // następne pobierz do zmiennej Reponse reponse z użyciem .extract().response()
-    // następnie zrób asercje z JsonPath:
-    // size =100
-    // oraz ze id pirzewszeg posta to 1
-
 
     @Test
     public void shouldGetAllPosts() {
@@ -112,7 +106,7 @@ public class GetPosts extends TestBase {
                 statusCode(200).
                 time(lessThan(1200L)).
                 body("[0].userId", equalTo(1)).
-                body("", hasSize(1));
+                body("", hasSize(2));
     }
 
 
