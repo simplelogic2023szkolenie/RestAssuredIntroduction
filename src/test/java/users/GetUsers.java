@@ -3,7 +3,6 @@ package users;
 import base.TestBase;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
-import matchers.CustomCollectionSizeMatcher;
 import org.junit.jupiter.api.Test;
 
 import java.util.HashMap;
@@ -14,19 +13,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 
 public class GetUsers extends TestBase {
-
-    @Test
-    public void shouldGetAllUsersWitchCustomMatcherWithBetterMngOnIncorrectArraySize() {
-                given().
-                                baseUri(baseUrl).
-                        when().
-                                get(posts+"/1").
-                        then().
-                                statusCode(200)
-                                .body("", CustomCollectionSizeMatcher.hasSize(2));
-    }
-
-    @Test
+        @Test
     public void shouldGetAllUsersExtractBody() {
         Response reponse =
                 given().

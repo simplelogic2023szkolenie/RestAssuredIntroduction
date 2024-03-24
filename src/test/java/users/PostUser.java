@@ -115,6 +115,4 @@ public class PostUser extends TestBase {
                 body("username", equalTo("mtadla")).
                 body("address.city", equalTo("Lublin"));
     }
-
-
 }
