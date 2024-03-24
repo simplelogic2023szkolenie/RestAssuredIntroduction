@@ -52,7 +52,7 @@ public class GetPosts extends TestBase {
     public void getPostsWithIdV1() {
         given().
                         baseUri(baseUrl).
-                        queryParam("userId", "1").
+                        queryParam("userId", 1).
                 when().
                         get(posts).
                 then().
