@@ -5,6 +5,7 @@ import io.restassured.http.ContentType;
 import models.user.Address;
 import models.user.User;
 import org.junit.jupiter.api.Test;
+import provier.UserProvider;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -13,6 +14,7 @@ import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.equalTo;
 
 public class PostUser extends TestBase {
+
 
     private String body = """
             {
@@ -104,15 +106,27 @@ public class PostUser extends TestBase {
 
 
         given().
-                body(user).
-                contentType(ContentType.JSON).
-                baseUri(baseUrl).
-        when().
-                post(users).
-        then().
-                statusCode(201).
-                body("id", equalTo(11)).
-                body("username", equalTo("mtadla")).
-                body("address.city", equalTo("Lublin"));
+                        body(user).
+                        contentType(ContentType.JSON).
+                        baseUri(baseUrl).
+                when().
+                        post(users).
+                then().
+                        statusCode(201).
+                        body("id", equalTo(11)).
+                        body("username", equalTo("mtadla")).
+                        body("address.city", equalTo("Lublin"));
+    }
+
+    @Test
+    public void shouldCreateNewUserV5() {
+        given().
+                        body(UserProvider.getFullUserData()).
+                        contentType(ContentType.JSON).
+                        baseUri(baseUrl).
+                when().
+                        post(users).
+                then().
+                        statusCode(201);
     }
 }
