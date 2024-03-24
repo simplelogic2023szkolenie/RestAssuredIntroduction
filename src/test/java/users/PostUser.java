@@ -56,6 +56,9 @@ public class PostUser extends TestBase {
 
     @Test
     public void shouldCreateNewUserV2() {
+        //https://github.com/rest-assured/rest-assured/wiki/Usage#content-type-based-serialization
+        //  body(user) -> zamiana mapy na json (serializacja) działa dlatego, że dodaliśmy bilioteke jackson
+        // do pom.xml -> wyjaśnienie w linku wyżej
         Map<String, Object> address = new HashMap<>();
         address.put("street", "Warszawska");
         address.put("city", "Lublin");
@@ -84,6 +87,9 @@ public class PostUser extends TestBase {
 
     @Test
     public void shouldCreateNewUserV3() {
+        //https://github.com/rest-assured/rest-assured/wiki/Usage#content-type-based-serialization
+        //  body(user) -> zamiana obiektu klasy User na json (serializacja) działa dlatego, że dodaliśmy bilioteke jackson
+        // do pom.xml -> wyjaśnienie w linku wyżej
         Address address = Address.builder()
                 .city("Lublin")
                 .street("Warszawska")
