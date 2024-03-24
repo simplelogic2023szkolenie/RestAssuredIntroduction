@@ -14,6 +14,10 @@ public class TestBase {
     public String users = "/users";
     @BeforeEach()
     public void setup(){
+        // ta opcja włacza logi reponse i request tylko jezeli test skończył sie failem
+//        RestAssured.enableLoggingOfRequestAndResponseIfValidationFails();
+
+        // to poniżej włacza logi zawsze, czy był fail czy nie było
         RestAssured.filters(new RequestLoggingFilter(), new ResponseLoggingFilter());
     }
 

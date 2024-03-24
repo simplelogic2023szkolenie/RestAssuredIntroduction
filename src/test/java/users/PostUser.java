@@ -168,10 +168,10 @@ public class PostUser extends TestBase {
                                 .extract()
                                 .as(User.class);
 
+
+        // poniżej 3 linijki specjalnie edytują reponseUser aby sfailować compare
         reponseUser.getAddress().getGeo().setLat("123123123312123");
-
         reponseUser.setName("qweqewqe");
-
         reponseUser.getCompany().setName("qwe");
         compareObjectWithoutId(reponseUser, expectedUser);
     }
