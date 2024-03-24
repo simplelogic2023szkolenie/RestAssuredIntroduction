@@ -59,7 +59,7 @@ public class PostPosts extends TestBase {
     }
 
     // stworzenie obiektu klasy Post
-    // przekazanianie go w body
+    // przekazanianie go w body do zapytania tworzącego nowy post
 
     // przy pomocy .extract().as(Post.class)
     // pobranie obiektu z reponspona
